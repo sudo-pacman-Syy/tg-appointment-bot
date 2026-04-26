@@ -1,5 +1,5 @@
 run:
-	docker compose run -d test_bot#1
+	docker compose run -d tg-appointment-bot
 
 rebuild:
 	docker compose build
