@@ -1,0 +1,18 @@
+name: "Deplot tg bot"
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy
+        run: |
+          git pull origin main
+          docker compose up -d
+          docker image prune -f
