@@ -1,0 +1,22 @@
+name: "Deploy tg bot"
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" > .env
+          echo "ADMIN_ID=${{ secrets.ADMIN_ID }}" >> .env
+
+      - name: Deploy
+        run: |
+          docker compose up -d --build
+          docker image prune -f
